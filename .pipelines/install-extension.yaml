@@ -1,16 +1,19 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - main
 
 pool:
   vmImage: windows-latest
 
+variables:
+- group: APP-SVC-EXT-KV
+
 steps:
 
 - script: |
-    choco
-  displayName: 'Run a multi-line script'
+    choco install armclient --source=https://chocolatey.org/api/v2/
+  displayName: 'Install armclient'
+
+- script: |
+    armclient
+  displayName: 'Install AppDynamics Extension'
+
