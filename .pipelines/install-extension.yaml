@@ -6,12 +6,20 @@ pool:
 
 variables:
 - group: APP-SVC-EXT-KV
+- group: APP-SVC-EXT-VERS
 
 steps:
 
 - script: |
     choco install armclient --source=https://chocolatey.org/api/v2/
   displayName: 'Install armclient'
+
+- task: FileTransform@1
+  displayName: 'Replace version number in payload.json'
+  inputs:
+    folderPath: '$(System.DefaultWorkingDirectory)/'
+    fileType: 'json'
+    targetFiles: 'payload.json'
 
 - script: |
     armclient spn $(TenantId) $(ServicePrincipalId) $(ServicePrincipalSecret)
