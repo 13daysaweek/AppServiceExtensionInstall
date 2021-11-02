@@ -14,6 +14,6 @@ steps:
   displayName: 'Install armclient'
 
 - script: |
-    armclient
+    armclient spn $(TenantId) $(ServicePrincipalId) $(ServicePrincipalKey)
   displayName: 'Install AppDynamics Extension'
 
