@@ -9,9 +9,9 @@ variables:
 
 steps:
 
-# - script: |
-#     choco install armclient --source=https://chocolatey.org/api/v2/
-#   displayName: 'Install armclient'
+- script: |
+    choco install armclient --source=https://chocolatey.org/api/v2/
+  displayName: 'Install armclient'
 
 - script: |
     armclient spn $(TenantId) $(ServicePrincipalId) $(ServicePrincipalSecret)
