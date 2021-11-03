@@ -26,5 +26,5 @@ steps:
 
     armclient put "/subscriptions/$(SubscriptionId)/resourceGroups/$(ResourceGroupName)/providers/Microsoft.Web/sites/$(AppServiceName)/siteextensions/$(ExtensionName)?api-version=2021-02-01" @payload.json
 
-  displayName: 'Install AppDynamics Extension'
+  displayName: 'Install Extension ${{ variables.ExtensionName }} version ${{ variables.properties.version }}'
 
