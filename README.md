@@ -52,4 +52,18 @@ One other consideration when needing to run ARMClient.exe in a pipeline is that 
 
 For service principal authentication, the pipeline retrieves credentials from an Azure Key Vault, linked to an Azure DevOps variable group.
 
-The pipeline also uses the File Transform task which allows for changing the version number of the feed URL in the payload.json file within the pipeline, sourcing values for the transform from variables, in this case variables within a Variable Group.
+The pipeline also uses the [File Transform task](https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/utility/file-transform?view=azure-devops) which allows for changing the version number of the feed URL in the payload.json file within the pipeline, sourcing values for the transform from variables, in this case variables within a Variable Group.
+
+### Variable Groups
+The following tables show the Variable Groups that the pipeline depends on.
+
+|Variable name|Description|
+|-----------|-------|
+|TenantId|The Azure AD tenant ID for the tenant where the service principal was created|
+|ServicePrincipalId|The ID of the service principal that will be used for authentication|
+|ServicePrincipalSecret|The secret/password for the Service Principal|
+|SubscriptionId|The Subscription ID (guid) of the Subscription that hodls your App Service resource|
+|ResourceGroupName| The name of the Resource Group that contains your App Service resource|
+|AppServiceName|The name of the App Serivce resource you wish to install your extension into|
+|ExtensionName|The name of the extension you wish to install|
+
