@@ -66,11 +66,12 @@ The following tables show the Variable Groups that the pipeline depends on.
 |SubscriptionId|The Subscription ID (guid) of the Subscription that hodls your App Service resource|
 |ResourceGroupName| The name of the Resource Group that contains your App Service resource|
 |AppServiceName|The name of the App Serivce resource you wish to install your extension into|
-|ExtensionName|The name of the extension you wish to install|
+
 
 #### APP-SVC-EXT-VERS
 |Variable Name|Description|
 |-|-|
 |properties.version|The version number of the extension that you wish to have inserted into your payload.json file|
+|ExtensionName|The name of the extension you wish to install|
 
 Note that we need two variable groups because Key Vault does not support secret names with special charactrers, but the File Transform task requires variable names to include `.` to separate JSON paths in the target JSON file.  To get around this, we create a second Variable Group that is not backed by Key Vault.
