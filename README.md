@@ -46,4 +46,10 @@ Replace the following tokens:
 After the command completes, the specified version of your extension should be installed on your App Service resource.
 
 ## Installing a specific version of a Site Extension via Azure Pipelines
-The included [install-extension.yaml](./pipelines/install-extension.yaml) file shows a simple Azure Pipeline that automates the process of installing a specified version of a Site Extension.
+The included [install-extension.yaml](/.pipelines/install-extension.yaml) file shows a simple Azure Pipeline that automates the process of installing a specified version of a Site Extension.  The pipeline runs the same `armclient put` command shown above, however it uses a service principal for authentication, rather than interactive auth.  Note that the service principal will need to have the appropriate permissions to update your App Serivce resource.  
+
+One other consideration when needing to run ARMClient.exe in a pipeline is that hosted Azure DevOps agents and GitHub Actions workers do not have ARMClient.exe installed.  Per the documentation in the ARMClient.exe repo, ARMClient.exe can be installed with [Cholately](https://chocolatey.org/), which is suitable for automation and installed by default on hosted Azure DevOps agents and GitHub Actions workers.
+
+For service principal authentication, the pipeline retrieves credentials from an Azure Key Vault, linked to an Azure DevOps variable group.
+
+The pipeline also uses the File Transform task which allows for changing the version number of the feed URL in the payload.json file within the pipeline, sourcing values for the transform from variables, in this case variables within a Variable Group.
