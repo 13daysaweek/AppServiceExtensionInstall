@@ -57,8 +57,9 @@ The pipeline also uses the [File Transform task](https://docs.microsoft.com/en-u
 ### Variable Groups
 The following tables show the Variable Groups that the pipeline depends on.
 
+#### APP-SVC-EXT-KV
 |Variable name|Description|
-|-----------|-------|
+|-|-|
 |TenantId|The Azure AD tenant ID for the tenant where the service principal was created|
 |ServicePrincipalId|The ID of the service principal that will be used for authentication|
 |ServicePrincipalSecret|The secret/password for the Service Principal|
@@ -67,3 +68,9 @@ The following tables show the Variable Groups that the pipeline depends on.
 |AppServiceName|The name of the App Serivce resource you wish to install your extension into|
 |ExtensionName|The name of the extension you wish to install|
 
+#### APP-SVC-EXT-VERS
+|Variable Name|Description|
+|-|-|
+|properties.version|The version number of the extension that you wish to have inserted into your payload.json file|
+
+Note that we need two variable groups because Key Vault does not support secret names with special charactrers, but the File Transform task requires variable names to include `.` to separate JSON paths in the target JSON file.  To get around this, we create a second Variable Group that is not backed by Key Vault.
