@@ -28,7 +28,7 @@ stages:
     pool:
       vmImage: windows-latest
     variables:
-    - parameters.version: ${{ parameters.extensionVersion }}
+    - properties.version: ${{ parameters.extensionVersion }}
     strategy:
       runOnce:
         deploy:
