@@ -1,5 +1,12 @@
 trigger:
-- main
+  branches:
+    include:
+    - main # Only run on changes to main
+
+pr:
+  branches:
+    exclude:
+    - '*' # Don't ever run when a PR is created
 
 pool:
   vmImage: windows-latest
