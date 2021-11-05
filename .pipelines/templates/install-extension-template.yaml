@@ -43,6 +43,10 @@ stages:
               choco install armclient --source=https://chocolatey.org/api/v2/
             displayName: 'Install armclient'
           
+          - script: |
+              dir $(Pipeline.Workspace)
+              dir $(Pipeline.Workspace)\payload\
+
           - task: FileTransform@1
             displayName: 'Replace version number in playload.json'
             inputs:
