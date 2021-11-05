@@ -53,5 +53,6 @@ stages:
           - script: |
               armclient spn ${{ parameters.tenantId }} ${{ parameters.servicePrincipalId }} ${{ parameters.servicePrincipalSecret }}
 
-              armclient put /subscriptions/${{ parameters.subscriptionId }}/resourceGroups/${{ parameters.resourceGroupName }}/providers/Microsoft.Web/sites/${{ parameters.appServiceName }}/siteextensions/${{ parameters.extensionName }}?api-version=2021-02-01" @$(Pipeline.Workspace)\armclientpayload\payload.json
+              armclient put "/subscriptions/${{ parameters.subscriptionId }}/resourceGroups/${{ parameters.resourceGroupName }}/providers/Microsoft.Web/sites/${{ parameters.appServiceName }}/siteextensions/${{ parameters.extensionName }}?api-version=2021-02-01" @payload.json
             displayName: 'Install extension'
+            workingDirectory: $(Pipeline.Workspace)\armclientpayload\
