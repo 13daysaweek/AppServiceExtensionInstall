@@ -44,8 +44,7 @@ stages:
             displayName: 'Install armclient'
           
           - script: |
-              dir $(Pipeline.Workspace)
-              dir $(Pipeline.Workspace)\payload\
+              dir $(Pipeline.Workspace)\payload\payload.json
 
           - task: FileTransform@1
             displayName: 'Replace version number in playload.json'
