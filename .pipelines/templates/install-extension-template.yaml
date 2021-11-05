@@ -37,6 +37,8 @@ stages:
       runOnce:
         deploy:
           steps:
+          - download: current
+            artifact: payload
           - script: |
               choco install armclient --source=https://chocolatey.org/api/v2/
             displayName: 'Install armclient'
@@ -46,7 +48,7 @@ stages:
             inputs:
               folderPath: '$(System.DefaultWorkingDirectory)/'
               fileType: 'json'
-              targetFiles: 'payload.json'
+              targetFiles: '$(Pipeline.Workspace)/payload/payload.json'
         
           - script: |
               armclient spn ${{ parameters.tenantId }} ${{ parameters.servicePrincipalId }} ${{ parameters.servicePrincipalSecret }}
