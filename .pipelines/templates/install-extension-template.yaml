@@ -1,0 +1,50 @@
+parameters:
+- name: stageName
+  default: ''
+- name: tenantId
+  default: ''
+- name: servicePrincipalId
+  default: ''
+- name: servicePrincipalSecret
+  default: ''
+- name: subscriptionId
+  default: ''
+- name: resourceGroupName
+  default: ''
+- name: appServiceName
+  default: ''
+- name: extensionName
+  default: ''
+- name: extensionVersion
+  default: ''
+
+stages:
+- stage: ${{ parameters.stageName }}
+  displayName: ${{ parameters.stageName }}
+
+  jobs:
+  - deployment: DeployExtension
+    displayName: 'Install ${{ parameterrs.extensionName }}'
+    pool:
+      vmImage: windows-latest
+    variables:
+    - parameters.version: ${{ parameters.extensionVersion }}
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: |
+              choco install armclient --source=https://chocolatey.org/api/v2/
+            displayName: 'Install armclient'
+          
+          - task: FileTransform@1
+            displayName: 'Replace version number in playload.json'
+            inputs:
+              folderPath: '$(System.DefaultWorkingDirectory)/'
+              fileType: 'json'
+              targetFileName: 'payload.json'
+        
+          - script: |
+              armclient spn ${{ parameters.tenantId }} ${{ parameters.servicePrincipalId }} ${{ parameters.servicePrincipalSecret }}
+
+              armclient put /subscriptions/${{ parameters.subscriptionId }}/resourceGroups/${{ parameters.resourceGroupName }}/providers/Microsoft.Web/sites/${{ parameters.appServiceName }}/siteextensions/${{ parameters.extensionName }}?api-version=2021-02-01" @payload.json
