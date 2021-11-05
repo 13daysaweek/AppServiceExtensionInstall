@@ -11,7 +11,7 @@ variables:
 stages:
 - template: templates/install-extension-template.yaml
   parameters:
-    stageName: 'deploy-extension'
+    stageName: 'ExtensionDeploy'
     tenantId: $(TenantId)
     servicePrincipalId: $(ServicePrincipalId)
     servicePrincipalSecret: $(ServicePrincipalSecret)
