@@ -1,0 +1,24 @@
+trigger:
+- main
+
+pool:
+  vmImage: windows-latest
+
+variables:
+- group: APP-SVC-EXT-KV
+- group: APP-SVC-EXT-VERS
+
+stages:
+- template: templates/install-extension-template.yaml
+  parameters:
+    stageName: 'deploy-extension'
+    tenantId: $(TenantId)
+    servicePrincipalId: $(ServicePrincipalId)
+    servicePrincipalSecret: $(ServicePrincipalSecret)
+    subscriptionId: $(SubscriptionId)
+    resourceGroupName: $(ResourceGroupName)
+    appServiceName: $(AppServiceName)
+    extensionName: $(ExtensionName)
+    extensionVersion: $(properties.version)'
+
+    
