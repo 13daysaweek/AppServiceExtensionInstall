@@ -19,7 +19,7 @@ stages:
     resourceGroupName: $(ResourceGroupName)
     appServiceName: $(AppServiceName)
     extensionName: $(ExtensionName)
-    extensionVersion: $(properties.version)'
+    extensionVersion: $(ExtensionVersion)'
     environmentName: 'development'
 
     
