@@ -38,20 +38,17 @@ stages:
         deploy:
           steps:
           - download: current
-            artifact: payload
+            artifact: armclientpayload
           - script: |
               choco install armclient --source=https://chocolatey.org/api/v2/
             displayName: 'Install armclient'
-          
-          - script: |
-              dir $(Pipeline.Workspace)\payload\payload.json
 
           - task: FileTransform@1
             displayName: 'Replace version number in playload.json'
             inputs:
-              folderPath: '$(System.DefaultWorkingDirectory)\'
+              folderPath: '$(Pipeline.Workspace)\armclientpayload\'
               fileType: 'json'
-              targetFiles: '$(Pipeline.Workspace)\**\*.json'
+              targetFiles: 'payload.json'
         
           - script: |
               armclient spn ${{ parameters.tenantId }} ${{ parameters.servicePrincipalId }} ${{ parameters.servicePrincipalSecret }}
