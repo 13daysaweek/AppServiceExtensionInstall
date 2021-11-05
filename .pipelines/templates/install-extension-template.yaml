@@ -51,7 +51,7 @@ stages:
             inputs:
               folderPath: '$(System.DefaultWorkingDirectory)\'
               fileType: 'json'
-              targetFiles: '$(Pipeline.Workspace)\payload\payload.json'
+              targetFiles: '$(Pipeline.Workspace)\**\*.json'
         
           - script: |
               armclient spn ${{ parameters.tenantId }} ${{ parameters.servicePrincipalId }} ${{ parameters.servicePrincipalSecret }}
