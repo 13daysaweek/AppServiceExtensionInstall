@@ -20,5 +20,6 @@ stages:
     appServiceName: $(AppServiceName)
     extensionName: $(ExtensionName)
     extensionVersion: $(properties.version)'
+    environmentName: 'development'
 
     

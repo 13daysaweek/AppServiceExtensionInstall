@@ -17,6 +17,8 @@ parameters:
   default: ''
 - name: extensionVersion
   default: ''
+- name: environmentName
+  default: ''
 
 stages:
 - stage: ${{ parameters.stageName }}
@@ -30,6 +32,7 @@ stages:
     variables:
     - name: properties.version
       value: ${{ parameters.extensionVersion }}
+    environment: ${{ parameters.environmentName }}
     strategy:
       runOnce:
         deploy:
