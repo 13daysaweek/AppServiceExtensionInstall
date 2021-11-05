@@ -75,3 +75,6 @@ The following tables show the Variable Groups that the pipeline depends on.
 |ExtensionName|The name of the extension you wish to install|
 
 Note that we need two variable groups because Key Vault does not support secret names with special charactrers, but the File Transform task requires variable names to include `.` to separate JSON paths in the target JSON file.  To get around this, we create a second Variable Group that is not backed by Key Vault.
+
+## Pipeline Template
+The pipelines folder also includes an example of a [template that encapsulates installing ARMClient.exe](/.pipelines/templates/install-extension-template.yaml), transforming the payload file and making the calls to ARMClient.exe, as well as a [pipeline that consumes this template](/.pipelines/install-extension-from-template.yaml).  
