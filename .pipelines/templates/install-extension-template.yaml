@@ -24,7 +24,7 @@ stages:
 
   jobs:
   - deployment: DeployExtension
-    displayName: 'Install ${{ parameterrs.extensionName }}'
+    displayName: 'Install ${{ parameters.extensionName }}'
     pool:
       vmImage: windows-latest
     variables:
