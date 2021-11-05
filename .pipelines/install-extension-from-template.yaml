@@ -12,13 +12,16 @@ stages:
 - stage: PublishArtifact
   jobs:
   - job: Publish
+    displayName: 'Publish artifact'
+    pool:
+      vmImage: windows-latest
     steps:
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: '$(System.DefaultWorkingDirectory)'
         artifact: payload
         publishLocation: pipeline
-        
+
 - template: templates/install-extension-template.yaml
   parameters:
     stageName: 'ExtensionDeploy'
