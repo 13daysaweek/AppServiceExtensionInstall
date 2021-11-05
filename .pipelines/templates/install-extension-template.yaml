@@ -46,7 +46,7 @@ stages:
             inputs:
               folderPath: '$(System.DefaultWorkingDirectory)/'
               fileType: 'json'
-              targetFileName: 'payload.json'
+              targetFiles: 'payload.json'
         
           - script: |
               armclient spn ${{ parameters.tenantId }} ${{ parameters.servicePrincipalId }} ${{ parameters.servicePrincipalSecret }}
